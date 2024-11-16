@@ -1,0 +1,24 @@
+svg {
+	border: 1px solid cyan;
+
+	g#pin {
+		cursor: pointer;
+		will-change: transform;
+		transition: transform 0.2s ease-in-out;
+	}
+
+	.tribe {
+		visibility: hidden;
+		will-change: visibility;
+		transition: visibility 0.2s ease-in-out;
+	}
+
+	g#flag {
+		cursor: pointer;
+		will-change: transform;
+		transition: transform 0.2s ease-in-out;
+		background: red;
+		width: 20px;
+		height: 20px;
+	}
+}
