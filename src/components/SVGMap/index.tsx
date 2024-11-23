@@ -1,7 +1,7 @@
 import { ComponentProps, forwardRef, useImperativeHandle, useRef } from "react";
 import "./SvgMap.scss";
 import { useMapContext } from "../../contexts/map.context";
-import data from "../../data";
+import data from "../../../_data";
 import EventIcon from "./EventIcon";
 import { Event } from "../../../types";
 

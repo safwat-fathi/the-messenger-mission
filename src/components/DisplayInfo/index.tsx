@@ -1,5 +1,7 @@
 import { useMapContext } from "../../contexts/map.context";
-import data from "../../data";
+import data from "../../../_data";
+import ProphetWivesCard from "../ProphetWivesCard";
+import { formatYearsAppendedWord } from "../../utils/format";
 
 const DisplayInfo = () => {
 	const { currentYear } = useMapContext();
@@ -13,6 +15,9 @@ const DisplayInfo = () => {
 		}
 	}
 
+	
+
+
 	return (
 		<div className="w-full flex flex-col gap-10">
 			<div className="prose max-w-none flex flex-col items-center gap-4 [&>*]:m-0">
@@ -22,13 +27,13 @@ const DisplayInfo = () => {
 				<h2>عدد المسلمين بالتقريب: {data[currentYear].number_of_muslims}</h2>
 			</div>
 
-			<div className="grid grid-cols-3 gap-6">
+			<div className="flex flex-col gap-6">
 				<div className="prose max-w-none flex flex-col items-center gap-4 [&>*]:m-0">
 					<div className="flex flex-col [&>*]:m-0 w-full">
 						<h3 className="">أهم الأحداث</h3>
-						<ul className="max-h-72 overflow-y-scroll">
+						<ul className="list-none overflow-y-scroll p-0 m-0">
 							{data[currentYear].events.map(event => (
-								<li key={event.title}>{event.title}</li>
+								<li key={event.title} className="py-2 px-4 rounded hover:bg-slate-300 transition-all cursor-pointer bg-slate-100">{event.title}</li>
 							))}
 						</ul>
 					</div>
@@ -36,36 +41,47 @@ const DisplayInfo = () => {
 
 				<div className="prose max-w-none flex flex-col items-center gap-4 [&>*]:m-0 ">
 					<div className="flex flex-col gap-2 [&>*]:m-0 w-full">
-						<h3 className="">زوجات الرسول ﷺ</h3>
-						<ul className="max-h-72 overflow-y-scroll">
+						<h2 className="">زوجات الرسول ﷺ</h2>
+						<div className="">
 							{data[currentYear].wives.map(wive => (
-								<li key={wive.name}>
-									<p>إسم الزوجة: {wive.name}</p>
-									<p>العمر: {wive.age}</p>
-									<p>الأولاد:</p>
-									<ul>
-										{wive.children.map(child => (
-											<li key={child.name}>{child.name}</li>
-										))}
-									</ul>
-									{wive.date_of_death && (
-										<p>تاريخ الوفاة: {wive.date_of_death}</p>
-									)}
-								</li>
+								// <>
+								// 	<li key={wive.name}>
+								// 		<p>إسم الزوجة: {wive.name}</p>
+								// 		<p>العمر: {wive.age}</p>
+								// 		<p>الأولاد:</p>
+								// 		<ul>
+								// 			{wive.children.map(child => (
+								// 				<li key={child.name}>
+								// 					<p>{child.name}</p>
+								// 					{Boolean(child.age) && <p>العمر: {formatYearsAppendedWord(child.age as number)}</p>}
+								// 					{Boolean(child.date_of_death.hijri_year ) && <p>تاريخ الوفاة: {formatHijriYear(child.date_of_death.hijri_year as number)} - {Boolean(child.date_of_death.gregorian_year ) && <> {child.date_of_death.gregorian_year} م</>}</p>}
+													
+								// 				</li>
+
+								// 			))}
+								// 		</ul>
+								// 		{wive.date_of_death && (
+								// 			<p>تاريخ الوفاة: {wive.date_of_death}</p>
+								// 		)}
+								// 	</li>
+								// 	<hr />
+								// </>
+								<ProphetWivesCard key={wive.name} {...wive} />
+								
 							))}
-						</ul>
+						</div>
 					</div>
 				</div>
 
 				<div className="prose max-w-none flex flex-col items-center gap-4 [&>*]:m-0 ">
 					<div className="flex flex-col gap-2 [&>*]:m-0 w-full">
-						<h3 className="">بعض أسماء الصحابة البارزين</h3>
+						<h2 className="">بعض أسماء الصحابة البارزين</h2>
 						<ul className="max-h-72 overflow-y-scroll">
 							{data[currentYear].prominent_companions.map(companion => (
 								<li key={companion.name}>
-									<p>الأسم: {companion.name}</p>
-									<p>العمر: {companion.age}</p>
-									<p>تاريخ الوفاة: {companion.date_of_death}</p>
+									<p><span className="font-bold">الأسم</span>: {companion.name}</p>
+									<p><span className="font-bold">العمر</span>: {formatYearsAppendedWord(companion.age)}</p>
+									<p><span className="font-bold">تاريخ الوفاة</span>: {companion.date_of_death.hijri_year} هـ - {companion.date_of_death.gregorian_year} م</p>
 								</li>
 							))}
 						</ul>

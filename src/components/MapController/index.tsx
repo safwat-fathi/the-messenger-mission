@@ -1,4 +1,4 @@
-import data from "../../data";
+import data from "../../../_data";
 import { useMapContext } from "../../contexts/map.context";
 
 const MapController = () => {

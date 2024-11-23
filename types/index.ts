@@ -27,13 +27,16 @@ export interface Data {
 	readonly [year: string]: YearData;
 }
 
-interface Companion {
+export interface Companion {
 	readonly name: string;
 	readonly age: number;
-	readonly date_of_death: string | null;
+	readonly date_of_death: {
+		readonly hijri_year: number | string | null;
+		readonly gregorian_year: number | string | null;
+	};
 }
 
-interface Wife {
+export interface Wife {
 	readonly name: string;
 	readonly age: number;
 	readonly date_of_death: string | null;
@@ -49,7 +52,10 @@ interface Concubine {
 interface Child {
 	readonly name: string;
 	readonly age: number | null;
-	readonly date_of_death: string | null;
+	readonly date_of_death: {
+		readonly hijri_year: number | string | null;
+		readonly gregorian_year: number | string | null;
+	};
 }
 
 interface YearData {
